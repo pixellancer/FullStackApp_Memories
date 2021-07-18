@@ -44,8 +44,7 @@ export const signin = async (req, res) => {
 /* Sign UP */
 /* 
     1. Get all user data
-    2. Serach user Email to check if exist
-    3. 
+    2. Serach user Email to check if exist 
 */
 export const signup = async (req, res) => {
     const { firstName, lastName, email, password, confirmPassword } = req.body
@@ -74,7 +73,35 @@ export const signup = async (req, res) => {
         res.status(200).json({ result, token })
 
     } catch (error) {
-        res.status(500).json({message: error})
+        res.status(500).json(error)
     }
     
+}
+
+
+/* Update user info */
+/* 
+    change Name or PassWord
+*/
+export const update = async (req, res) => {
+    const { name, email, password, confirmPassword } = req.body
+
+    try {
+        if (password !== confirmPassword) {
+            return res.status(400).json({message: "Password do not match!"})
+        }
+        
+        const hashPassword = await bcrypt.hash(password, 12)
+        const result = await UserDB.findOneAndUpdate({ email }, { name, password:hashPassword }, {new:true} )
+  
+
+        console.log('req.body', req.body._id, typeof req.body._id);
+        console.log('result', result._id, typeof req.body._id);
+        const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: "1h"})
+        console.log(token);
+
+        res.status(200).json({ result, token }) 
+    } catch (error) {
+        res.status(500).json(error)
+    }
 }

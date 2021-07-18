@@ -2,7 +2,9 @@ import axios from 'axios'
 
 // const url = 'http://localhost:4000/posts'
 
-const API = axios.create({ baseURL: "http://localhost:4000/" })
+const API = axios.create({
+    baseURL: "http://localhost:4000/"
+})
 
 
 // it takes function and apply on each request
@@ -21,6 +23,7 @@ export const updatePost = (id, updatedPost) => API.patch(`${'/posts'}/${id}`, up
 export const deletePost = (id) => API.delete(`${'/posts'}/${id}`)
 export const likePost = (id) => API.patch(`${'/posts'}/${id}/likePost`)
 
+export const profileUpdate = (userInfo) => API.patch(`/user/${userInfo._id}/profile`, userInfo)
 
 export const signIn = (userInfo) => API.post('/user/signin', userInfo)
 export const signUp = (userInfo) => API.post('/user/signup', userInfo)

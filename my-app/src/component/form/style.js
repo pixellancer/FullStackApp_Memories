@@ -7,6 +7,8 @@ export default makeStyles((theme) => ({
     },
   },
   paper: {
+    // width: 'inherit',
+    // position:'fixed',
     padding: theme.spacing(2),
   },
   form: {

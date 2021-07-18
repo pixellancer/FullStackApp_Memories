@@ -1,5 +1,12 @@
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { AppBar, Avatar, Button, Toolbar, Typography } from "@material-ui/core";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  Toolbar,
+  Typography,
+  ButtonBase,
+} from "@material-ui/core";
 import useStyle from "./style";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -11,7 +18,6 @@ const NavBar = () => {
   const history = useHistory();
   const location = useLocation();
 
-  
   // JSON.parse(localStorage.getItem('profile')) : get the user info from local storage
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
@@ -32,6 +38,10 @@ const NavBar = () => {
     dispatch({ type: "LOGOUT" });
     history.push("/posts");
     setUser(null);
+  };
+
+  const openUserProfile = () => {
+    history.push(`/user/${user.result._id}/profile`);
   };
 
   return (
@@ -60,7 +70,10 @@ const NavBar = () => {
         <Toolbar className={classes.toolbar}>
           {user ? (
             <div className={classes.profile}>
-              <div className={classes.profileUser}>
+              <ButtonBase
+                className={classes.profileUser}
+                onClick={openUserProfile}
+              >
                 <Avatar
                   className={classes.purple}
                   alt={user.result.name}
@@ -71,7 +84,7 @@ const NavBar = () => {
                 <Typography className={classes.username} variant="h6">
                   {user.result.name}
                 </Typography>
-              </div>
+              </ButtonBase>
 
               <Button
                 variant="contained"

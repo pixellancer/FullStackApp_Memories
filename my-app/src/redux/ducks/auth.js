@@ -53,6 +53,18 @@ export const signin = (userInfo, history) => async (dispatch) => {
 
 }
 
+export const update = (userInfo, history) => async (dispatch) => {
+    try {
+        const { data } = await api.profileUpdate(userInfo)
+        dispatch({ type: AUTH, payload: data })
+        dispatch({ type: 'ERROR', payload: null})
+        history.push(`/user/${data._id}/profile`)
+    } catch (error) {
+        const err = error.response.data.message
+        dispatch({ type: 'ERROR', payload: err})
+    }
+}
+
 
 
 // reducer

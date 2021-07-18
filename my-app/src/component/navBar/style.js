@@ -11,6 +11,7 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 50px',
+    flexWrap:'wrap'
   },
   heading: {
     color: 'rgba(105, 211, 230, 1)',
@@ -21,8 +22,10 @@ export default makeStyles((theme) => ({
   },
   toolbar: {
     display: 'flex',
+    maxWidth: '40%',
+    minWidth: '300px',
     justifyContent: 'flex-end',
-    width: '400px',
+    flexWrap:'wrap',
   },
   profile: {
     display: 'flex',

@@ -27,12 +27,12 @@ const Post = ({ post, setCurrentId }) => {
   const loggedByAuth = user?.result?._id === post.creater;
   const checkUserLogged = loggedByAuth || loggedByGoogle;
 
-  const openPost = () => { history.push(`/posts/${post._id}`) };
-  
-  
+  const openPost = () => {
+    history.push(`/posts/${post._id}`);
+  };
+
   return (
     <Card className={classes.card}>
-      
       <ButtonBase className={classes.cardAction} onClick={openPost}>
         <CardMedia
           className={classes.media}
@@ -49,8 +49,6 @@ const Post = ({ post, setCurrentId }) => {
             {moment(post.createdAt).format("h:mm:ss a")}
           </Typography>
         </div>
-
-
 
         <div className={classes.details}>
           <Typography variant="body2" color="textSecondary">
@@ -74,40 +72,40 @@ const Post = ({ post, setCurrentId }) => {
             {post.message}
           </Typography>
         </CardContent>
-        </ButtonBase>
+      </ButtonBase>
 
-        <CardActions className={classes.cardActions}>
-          <Button
-            size="small"
-            color="primary"
-            disabled={!user?.result}
-            onClick={() => dispatch(likePost(post._id))}
-          >
-            <Likes post={post} user={user} />
+      <CardActions className={classes.cardActions}>
+        <Button
+          size="small"
+          color="primary"
+          disabled={!user?.result}
+          onClick={() => dispatch(likePost(post._id))}
+        >
+          <Likes post={post} user={user} />
         </Button>
-        
-          {checkUserLogged ? (
+
+        {checkUserLogged ? (
           <div className={classes.overlay2}>
             <Button
               style={{ color: "white" }}
               size="small"
-              onClick={() => setCurrentId(post._id)}
+              onClick={() => (setCurrentId ? setCurrentId(post._id) : null)}
             >
               <MoreHorizIcon fontSize="medium" />
             </Button>
           </div>
         ) : null}
-        
-          {checkUserLogged ? (
-            <Button
-              size="small"
-              color="secondary"
-              onClick={() => dispatch(deletePost(post._id))}
-            >
-              <DeleteIcon fontSize="small" /> Delete
-            </Button>
-          ) : null}
-        </CardActions>
+
+        {checkUserLogged ? (
+          <Button
+            size="small"
+            color="secondary"
+            onClick={() => dispatch(deletePost(post._id))}
+          >
+            <DeleteIcon fontSize="small" /> Delete
+          </Button>
+        ) : null}
+      </CardActions>
     </Card>
   );
 };
