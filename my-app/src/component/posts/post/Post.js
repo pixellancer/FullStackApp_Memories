@@ -30,6 +30,11 @@ const Post = ({ post, setCurrentId }) => {
   const openPost = () => {
     history.push(`/posts/${post._id}`);
   };
+  
+  const directToEdit = () => {
+    setCurrentId(post._id)
+    history.push(`/posts`);
+  }
 
   return (
     <Card className={classes.card}>
@@ -89,7 +94,7 @@ const Post = ({ post, setCurrentId }) => {
             <Button
               style={{ color: "white" }}
               size="small"
-              onClick={() => (setCurrentId ? setCurrentId(post._id) : null)}
+              onClick={() => (setCurrentId ? setCurrentId(post._id) : history.push(`/posts`))}
             >
               <MoreHorizIcon fontSize="medium" />
             </Button>

@@ -54,14 +54,18 @@ export const signin = (userInfo, history) => async (dispatch) => {
 }
 
 export const update = (userInfo, history) => async (dispatch) => {
+    console.log('In redux: ',userInfo);
     try {
         const { data } = await api.profileUpdate(userInfo)
+        console.log('data', data);
         dispatch({ type: AUTH, payload: data })
         dispatch({ type: 'ERROR', payload: null})
-        history.push(`/user/${data._id}/profile`)
+        history.push(`/user/${data.result._id}/profile`)
+        console.log('update', data.message);
     } catch (error) {
         const err = error.response.data.message
         dispatch({ type: 'ERROR', payload: err})
+        console.log(error.response.data.message);
     }
 }
 

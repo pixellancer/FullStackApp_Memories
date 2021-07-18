@@ -19,3 +19,11 @@
 ### Run App:
 
 - _npm run start_
+
+#### Testing Acount:
+- loki@gmai.com
+- ws@123.com
+- jk@123.com
+
+- Password: 111 for all acounts
+

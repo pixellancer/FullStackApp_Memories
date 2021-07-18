@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 import UserDB from '../models/user.js'
+import PostMessage from '../models/postMessage.js'
 
 
 /* Sign In */
@@ -85,23 +86,22 @@ export const signup = async (req, res) => {
 */
 export const update = async (req, res) => {
     const { name, email, password, confirmPassword } = req.body
+    const { id } = req.params
 
     try {
-        if (password !== confirmPassword) {
-            return res.status(400).json({message: "Password do not match!"})
-        }
-        
+
         const hashPassword = await bcrypt.hash(password, 12)
         const result = await UserDB.findOneAndUpdate({ email }, { name, password:hashPassword }, {new:true} )
   
-
-        console.log('req.body', req.body._id, typeof req.body._id);
-        console.log('result', result._id, typeof req.body._id);
         const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: "1h"})
-        console.log(token);
 
-        res.status(200).json({ result, token }) 
+        const updatedPost = await PostMessage.findOneAndUpdate( {creater:id}, { name }, { new: true })
+
+        const message = 'Your profile has been successfully updated!'
+
+        res.status(200).json({ result, token, message })
     } catch (error) {
         res.status(500).json(error)
     }
 }
+

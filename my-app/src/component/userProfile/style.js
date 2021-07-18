@@ -17,8 +17,15 @@ export default makeStyles((theme) => ({
         borderBottom: '2px solid grey'
     },
     profileUpdate: {
+        display: 'flex',
+        flexDirection:'column',
         width: '50%',
         margin: 'auto'
+    },
+    warn: {
+        display:'blocks',
+        width: '50%',
+        margin: '1rem auto',
     },
     submit: {
         width: "30%",
@@ -46,4 +53,14 @@ export default makeStyles((theme) => ({
         fontSize: '32pt',
 
     },
+    userNoPosts: {
+        textAlign:'center',
+        marginRight: 'auto',
+        padding:'3rem'
+    },
+    createPost: {
+        display:'block',
+        width: "15%",
+        margin: 'auto',
+    }
 }));
