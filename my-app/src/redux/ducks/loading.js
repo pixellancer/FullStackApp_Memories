@@ -1,7 +1,4 @@
 // initState
-
-import { Switch } from "react-router"
-
 const initState = {
     loading: true
 }

@@ -33,10 +33,10 @@ app.use('/user', usersRoute)
 // also need to import dotenv and configure it
 /* ------------------------------  important  --------------------------- */
 
-// const CONECTION_URL = "mongodb+srv://user-baihan:123741@cluster0.6hjpf.mongodb.net/postsProj"
+const CONECTION_URL = "mongodb+srv://user-baihan:123741@cluster0.6hjpf.mongodb.net/postsProj"
 // mongodb+srv://user-baihan:<password>@cluster0.6hjpf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
-mongoose.connect(process.env.CONECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(CONECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(PORT, () => console.log(`Server running on ${PORT}`)))
     .catch((error)=> console.log(error.message))
 

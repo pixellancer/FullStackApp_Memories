@@ -30,11 +30,6 @@ const Post = ({ post, setCurrentId }) => {
   const openPost = () => {
     history.push(`/posts/${post._id}`);
   };
-  
-  const directToEdit = () => {
-    setCurrentId(post._id)
-    history.push(`/posts`);
-  }
 
   return (
     <Card className={classes.card}>
