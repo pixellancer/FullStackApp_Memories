@@ -18,7 +18,7 @@ export const getPosts = async (req, res) => {
 export const getPostDetail = async (req, res) => {
     const {id} = req.params
     try {
-        const postMessage = await PostMessage.findOne({ creater: id })
+        const postMessage = await PostMessage.findById( id )
         console.log(postMessage);
         res.status(200).json(postMessage)
     } catch (error) {
