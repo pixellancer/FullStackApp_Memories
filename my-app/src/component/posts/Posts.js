@@ -6,18 +6,14 @@ import useStyle from "./style";
 const Posts = ({ setCurrentId }) => {
   const classes = useStyle();
   const posts = useSelector((state) => state.posts.posts);
-  // console.log('Posts --- Show Posts', posts);
-   
+  // console.log("Posts --- Show Posts", posts);
 
-  return !posts.length ? (
-    <CircularProgress />
-  ) : (
-      // <div style={{ overflow: 'auto'}}>
-        <Grid
+  return posts.length ? (
+    <Grid
       className={classes.mainContainer}
       container
       alignItems="stretch"
-        spacing={3}
+      spacing={3}
     >
       {posts.map((post) => (
         <Grid key={post._id} item xs={12} sm={6}>
@@ -25,8 +21,8 @@ const Posts = ({ setCurrentId }) => {
         </Grid>
       ))}
     </Grid>
-      // </div>
-   
+  ) : (
+    <CircularProgress />
   );
 };
 

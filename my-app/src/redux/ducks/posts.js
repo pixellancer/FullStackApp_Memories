@@ -97,7 +97,7 @@ const postsReducer = (state = initailState, action) => {
             console.log('FETCH_ONE');
             return  {  ...state, post: action.payload }
         case CREATE:
-            return { ...state, posts: action.payload }
+            return { ...state, posts: [ ...state.posts, action.payload]}
         case UPDATE:
             const newPosts = state.posts.map((post) => post._id === action.payload._id ? action.payload : post)
             return {  ...state, posts: newPosts }

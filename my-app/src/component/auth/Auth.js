@@ -29,6 +29,7 @@ const Auth = () => {
   const [showPW, setShowPw] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [userInfo, setUserInfo] = useState(initUser)
+  const [validataPw,setValidatePw] = useState(null)
   
   const logError = useSelector(state => state.error.error)
   /* Testing code */
@@ -38,7 +39,7 @@ const Auth = () => {
   const handleSubmit = (e) => {
     /* prevent defualt behaviour (refresh the page) of form submit */
     e.preventDefault()
-    console.log("UserInfo Submited: ",userInfo);
+    console.log("UserInfo Submited: ", userInfo);
 
     if (isSignup) {
       /* sign up operations */
@@ -46,16 +47,26 @@ const Auth = () => {
     } else {
       dispatch(signin(userInfo, history))
     }
-  };
-
+  }
+  
   const handleChange = (e) => {
     /* [obj_property]:value  is fynamically update obj property while running (even the property is undefine)*/
-    setUserInfo({ ...userInfo, [e.target.name]:e.target.value})
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
+    
+
+    const regexp = new RegExp(/^(?=.*\d).{8,}$/)
+    const pw = false
+    if (pw) {
+      setValidatePw(true)
+    } else {
+      setValidatePw(false)
+    }
   };
 
   const handleShowPassword = () => {
     setShowPw((showPW) => !showPW);
   };
+
 
   const switchMode = () => {
     setIsSignup((isSignup) => !isSignup);
@@ -133,6 +144,7 @@ const Auth = () => {
 
           
           {logError && <Alert className={classes.warn} severity="error" >{logError}</Alert>}
+          {!validataPw ? (<Alert className={classes.warn} severity="error" >{'Wrong password'}</Alert>):(null)}
           
           <Button
             type="submit"
