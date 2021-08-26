@@ -23,8 +23,3 @@ My first Full stack MERN application. Memories Posts social media web applicatio
 - Express
 - Node.js
 
-
-## Note:
-History commits from Antra-react branch:
-
-https://github.com/fre-antra/React_SEP_052421/tree/by_Baihan/hw/FullStackApp
